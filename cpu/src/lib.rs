@@ -17,7 +17,7 @@
 #[macro_use]
 extern crate bitflags;
 
-pub mod bitwidth;
+mod bitwidth;
 pub mod buffer;
 pub mod cpu;
 mod instructions;
