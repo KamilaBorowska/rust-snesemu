@@ -97,6 +97,8 @@ fn a16<M, F, G, H>(cpu: &mut CPU<M>, f: F, g: G, h: H)
     f(cpu, sixteen_bits, g, h);
 }
 
+// Assembly opcodes
+
 fn lda<M: Mapper, T: BitWidth>(cpu: &mut CPU<M>, value: T) {
     T::set(&mut cpu.registers.a, value);
 }
