@@ -15,4 +15,4 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 pub const WIDTH: usize = 512;
-pub const HEIGHT: usize = 448;
+pub const HEIGHT: usize = 480;
