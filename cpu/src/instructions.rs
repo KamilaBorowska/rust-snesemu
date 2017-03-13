@@ -123,7 +123,7 @@ pub fn run_instruction<M: Mapper>(cpu: &mut CPU<M>) {
         0x9C => a16(cpu, absolute_address, stz::<M, u8>, stz::<M, u16>),
 
         code => {
-            println!("{:x}", code);
+            println!("Tried to run unimplemented instruction {:x}.", code);
             unimplemented!();
         }
     }
