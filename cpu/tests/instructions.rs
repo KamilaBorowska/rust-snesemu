@@ -20,3 +20,15 @@ fn lda_immediate() {
     cpu.step();
     assert_eq!(0x20, cpu.registers.a);
 }
+
+#[test]
+fn lda_absolute() {
+    let bytes = create_rom(&[0xAD, 0x00, 0x00, 0xAD, 0x01, 0x00]);
+    let mut cpu = CPU::new(LoROM::new(&bytes));
+    cpu.ram[0] = 35;
+    cpu.ram[1] = 77;
+    cpu.step();
+    assert_eq!(35, cpu.registers.a);
+    cpu.step();
+    assert_eq!(77, cpu.registers.a);
+}

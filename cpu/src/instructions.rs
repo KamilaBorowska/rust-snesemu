@@ -44,16 +44,18 @@ fn absolute<M, F, G>(cpu: &mut CPU<M>, sixteen_bits: bool, f: F, g: G)
           F: FnOnce(&mut CPU<M>, u8),
           G: FnOnce(&mut CPU<M>, u16)
 {
+    fn address_reader<M, T, F>(cpu: &mut CPU<M>, address: u16, f: F)
+        where M: Mapper,
+              T: BitWidth,
+              F: FnOnce(&mut CPU<M>, T)
+    {
+        let value = cpu.read(cpu.registers.db, address);
+        f(cpu, value);
+    }
     absolute_address(cpu,
                      sixteen_bits,
-                     |cpu, address| {
-                         let value = cpu.read(cpu.registers.db, address);
-                         g(cpu, value);
-                     },
-                     |cpu, address| {
-                         let value = cpu.read(cpu.registers.db, address);
-                         f(cpu, value);
-                     });
+                     |cpu, address| address_reader(cpu, address, f),
+                     |cpu, address| address_reader(cpu, address, g));
 }
 
 fn absolute_address<M, F, G>(cpu: &mut CPU<M>, sixteen_bits: bool, f: F, g: G)
