@@ -38,4 +38,22 @@
 pub const WIDTH: usize = 512;
 
 /// Height of a rendering buffer.
+///
+/// ```
+/// use snesemu_cpu::buffer::{WIDTH, HEIGHT};
+/// use snesemu_cpu::Emulator;
+/// use snesemu_cpu::mapper::LoROM;
+///
+/// let mut buffer = [0; WIDTH * HEIGHT];
+///
+/// let mut rom = [0; 0x8000];
+/// // infinite loop
+/// // label: BRA label
+/// rom[..2].copy_from_slice(&[0x80, 0xFE]);
+/// // Reset vector is at 0x8000
+/// rom[0x7FFC..0x7FFE].copy_from_slice(&[0x00, 0x80]);
+///
+/// let mut emulator = Emulator::from_rom(LoROM::new(&rom));
+/// emulator.run_frame(&mut buffer);
+/// ```
 pub const HEIGHT: usize = 480;
