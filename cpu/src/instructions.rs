@@ -89,6 +89,16 @@ fn immediate<M, F, G>(cpu: &mut CPU<M>, sixteen_bits: bool, f: F, g: G)
     }
 }
 
+fn pc_relative<M, F>(cpu: &mut CPU<M>, when: F)
+    where M: Mapper,
+          F: FnOnce(&mut CPU<M>) -> bool
+{
+    let value = fetch(cpu);
+    if when(cpu) {
+        cpu.registers.pc = cpu.registers.pc.wrapping_add(value as i8 as u16);
+    }
+}
+
 fn a16<M, F, G, H>(cpu: &mut CPU<M>, f: F, g: G, h: H)
     where M: Mapper,
           F: FnOnce(&mut CPU<M>, bool, G, H)
@@ -110,6 +120,9 @@ fn stz<M: Mapper, T: BitWidth + Default>(cpu: &mut CPU<M>, address: u16) {
 
 pub fn run_instruction<M: Mapper>(cpu: &mut CPU<M>) {
     match fetch(cpu) {
+        // BRA
+        0x80 => pc_relative(cpu, |_| true),
+
         // LDA (Load Accumulator from Memory)
         // immediate
         0xA9 => a16(cpu, immediate, lda, lda),

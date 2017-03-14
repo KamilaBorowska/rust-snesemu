@@ -32,3 +32,13 @@ fn lda_absolute() {
     cpu.step();
     assert_eq!(77, cpu.registers.a);
 }
+
+#[test]
+fn bra() {
+    let bytes = create_rom(&[0x80, 0xFE]);
+    let mut cpu = CPU::new(LoROM::new(&bytes));
+    for _ in 0..20 {
+        assert_eq!(0x8000, cpu.registers.pc);
+        cpu.step();
+    }
+}
