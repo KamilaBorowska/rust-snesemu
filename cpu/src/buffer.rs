@@ -19,11 +19,11 @@
 /// # Examples
 ///
 /// ```
-/// use snesemu_cpu::buffer::{WIDTH, HEIGHT};
+/// use snesemu_cpu::buffer;
 /// use snesemu_cpu::Emulator;
 /// use snesemu_cpu::mapper::LoROM;
 ///
-/// let mut buffer = [0; WIDTH * HEIGHT];
+/// let mut buffer = [0; buffer::WIDTH * buffer::HEIGHT];
 ///
 /// let mut rom = [0; 0x8000];
 /// // infinite loop
@@ -40,11 +40,11 @@ pub const WIDTH: usize = 512;
 /// Height of a rendering buffer.
 ///
 /// ```
-/// use snesemu_cpu::buffer::{WIDTH, HEIGHT};
+/// use snesemu_cpu::buffer;
 /// use snesemu_cpu::Emulator;
 /// use snesemu_cpu::mapper::LoROM;
 ///
-/// let mut buffer = [0; WIDTH * HEIGHT];
+/// let mut buffer = [0; buffer::WIDTH * buffer::HEIGHT];
 ///
 /// let mut rom = [0; 0x8000];
 /// // infinite loop
