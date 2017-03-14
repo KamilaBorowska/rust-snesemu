@@ -52,6 +52,17 @@ pub struct CPU<M: Mapper> {
 }
 
 impl<M: Mapper> CPU<M> {
+    /// Create a new CPU object with a mapper.
+    ///
+    /// # Example
+    ///
+    /// ```
+    /// use snesemu_cpu::cpu::CPU;
+    /// use snesemu_cpu::mapper::LoROM;
+    ///
+    /// let rom = [0; 0x8000];
+    /// let mut cpu = CPU::new(LoROM::new(&rom));
+    /// ```
     pub fn new(mapper: M) -> Self {
         let mut cpu = CPU {
             ram: [0x55; RAM_SIZE],
